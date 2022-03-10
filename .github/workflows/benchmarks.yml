@@ -66,7 +66,8 @@ jobs:
             os: ubuntu-20.04
             install: libc++-12-dev libc++abi-12-dev
 
-    runs-on: ${{matrix.os}}
+    # runs-on: ${{matrix.os}}
+    runs-on: [self-hosted, linux, x64]
 
     steps:
       - uses: actions/checkout@v2
@@ -108,67 +109,67 @@ jobs:
         run: |
           ./${{matrix.outputfile}}
 
-  windows:
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - compiler: cl
-            compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
-            sourcefile: string.cpp
-            outputfile: benchmark.exe            
-            os: windows-2019
-          - compiler: cl
-            compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
-            sourcefile: uint32.cpp
-            outputfile: benchmark.exe            
-            os: windows-2019
-          - compiler: cl
-            compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
-            sourcefile: uint64.cpp
-            outputfile: benchmark.exe            
-            os: windows-2019
-
-    runs-on: ${{matrix.os}}
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Install Boost
-        shell: cmd
-        run: |
-          cd %GITHUB_WORKSPACE%
-          git clone https://github.com/boostorg/boost.git boost-root
-          cd boost-root
-          git checkout boost-1.78.0
-          git submodule update --init
-          cmd /c bootstrap.bat
-          .\b2.exe -d0 headers
-
-      - name: Install Abseil
-        shell: cmd
-        run: |
-          cd %GITHUB_WORKSPACE%
-          git clone -b lts_2021_11_02 https://github.com/abseil/abseil-cpp.git abseil-root
-
-      - name: Install fastrange
-        shell: cmd
-        run: |
-          cd %GITHUB_WORKSPACE%
-          git clone https://github.com/lemire/fastrange.git fastrange-root
-
-      - name: Compile
-        shell: cmd
-        run: |
-          cd %GITHUB_WORKSPACE%
-          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
-          set INCLUDE=%INCLUDE%;%GITHUB_WORKSPACE%\boost-root
-          set INCLUDE=%INCLUDE%;%GITHUB_WORKSPACE%\abseil-root
-          set INCLUDE=%INCLUDE%;%GITHUB_WORKSPACE%\fastrange-root
-          echo %INCLUDE%
-          ${{matrix.compiler}} ${{matrix.sourcefile}} ${{matrix.compileroptions}}
-
-      - name: Run benchmark
-        shell: cmd
-        run: |
-          ${{matrix.outputfile}}
+#   windows:
+#     strategy:
+#       fail-fast: false
+#       matrix:
+#         include:
+#           - compiler: cl
+#             compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
+#             sourcefile: string.cpp
+#             outputfile: benchmark.exe            
+#             os: windows-2019
+#           - compiler: cl
+#             compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
+#             sourcefile: uint32.cpp
+#             outputfile: benchmark.exe            
+#             os: windows-2019
+#           - compiler: cl
+#             compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
+#             sourcefile: uint64.cpp
+#             outputfile: benchmark.exe            
+#             os: windows-2019
+# 
+#     runs-on: ${{matrix.os}}
+# 
+#     steps:
+#       - uses: actions/checkout@v2
+# 
+#       - name: Install Boost
+#         shell: cmd
+#         run: |
+#           cd %GITHUB_WORKSPACE%
+#           git clone https://github.com/boostorg/boost.git boost-root
+#           cd boost-root
+#           git checkout boost-1.78.0
+#           git submodule update --init
+#           cmd /c bootstrap.bat
+#           .\b2.exe -d0 headers
+# 
+#       - name: Install Abseil
+#         shell: cmd
+#         run: |
+#           cd %GITHUB_WORKSPACE%
+#           git clone -b lts_2021_11_02 https://github.com/abseil/abseil-cpp.git abseil-root
+# 
+#       - name: Install fastrange
+#         shell: cmd
+#         run: |
+#           cd %GITHUB_WORKSPACE%
+#           git clone https://github.com/lemire/fastrange.git fastrange-root
+# 
+#       - name: Compile
+#         shell: cmd
+#         run: |
+#           cd %GITHUB_WORKSPACE%
+#           call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+#           set INCLUDE=%INCLUDE%;%GITHUB_WORKSPACE%\boost-root
+#           set INCLUDE=%INCLUDE%;%GITHUB_WORKSPACE%\abseil-root
+#           set INCLUDE=%INCLUDE%;%GITHUB_WORKSPACE%\fastrange-root
+#           echo %INCLUDE%
+#           ${{matrix.compiler}} ${{matrix.sourcefile}} ${{matrix.compileroptions}}
+# 
+#       - name: Run benchmark
+#         shell: cmd
+#         run: |
+#           ${{matrix.outputfile}}
