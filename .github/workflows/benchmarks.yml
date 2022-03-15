@@ -225,10 +225,13 @@ jobs:
         run: |
           set -xe
           sudo -E apt-add-repository -y ppa:ubuntu-toolchain-r/test
-          sudo apt-get update
-          if uname -p | grep -q 'x86_64'; then sudo dpkg --add-architecture i386 ; fi
-          sudo apt-get update
+          sudo apt-get update -y
+          echo "First set of packages: "
           sudo apt install -y ${{matrix.install}}
+          echo "Second apt-get update -y : "
+          sudo apt-get update -y
+          echo "dpkg add-arch : "
+          if uname -p | grep -q 'x86_64'; then sudo dpkg --add-architecture i386 ; fi
           
       - name: Install Boost
         run: |
