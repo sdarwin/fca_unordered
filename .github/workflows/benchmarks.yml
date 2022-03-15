@@ -14,6 +14,15 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - name: dedicated-server
+            compiler: g++-11
+            architecture: -m64
+            sourcefile: string.cpp
+            compileroptions: -std=c++2a -O3 -DNDEBUG -DHAVE_ABSEIL
+            outputfile: benchmark
+            command: sudo cset shield --exec -- nice -n -20 sudo -u gha ./benchmark
+            os: [self-hosted, linux, x64]
+            install: g++-11
           - compiler: g++-11
             architecture: -m64
             sourcefile: string.cpp
@@ -309,4 +318,9 @@ jobs:
       - name: Run benchmark
         shell: cmd
         run: |
-          ${{matrix.outputfile}}
+          if [ -n "${{matrix.command}}" ]; then
+              ${{matrix.command}}
+          else
+              ./${{matrix.outputfile}}
+          fi
+
