@@ -228,10 +228,9 @@ jobs:
           sudo apt-get update -y
           echo "First set of packages: "
           sudo apt-get install -y ${{matrix.install}}
-          echo "Second apt-get update -y : "
-          sudo apt-get update -y
           # echo "dpkg add-arch : "
           # if uname -p | grep -q 'x86_64'; then sudo dpkg --add-architecture i386 ; fi
+          # sudo apt-get update -y
           
       - name: Install Boost
         run: |
