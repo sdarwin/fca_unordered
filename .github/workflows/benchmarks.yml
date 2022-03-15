@@ -257,8 +257,10 @@ jobs:
       - name: Run benchmarks
         run: |
           if [ -n "${{matrix.command}}" ]; then
+              echo "running benchmarks"
               ${{matrix.command}}
           else
+              echo "running benchmarks"
               ./${{matrix.outputfile}}
           fi
   windows:
