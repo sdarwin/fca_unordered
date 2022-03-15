@@ -23,33 +23,33 @@ jobs:
             os: [self-hosted, linux, x64]
             install: g++-11
             command: sudo cset shield --exec -- nice -n -20 sudo -u gha ./benchmark
-          - name: dedicated-server
-            compiler: g++-11
-            architecture: -m64
-            sourcefile: string_view.cpp
-            compileroptions: -std=c++2a -O3 -DNDEBUG -DHAVE_ABSEIL
-            outputfile: benchmark
-            os: [self-hosted, linux, x64]
-            install: g++-11
-            command: sudo cset shield --exec -- nice -n -20 sudo -u gha ./benchmark
-          - name: dedicated-server
-            compiler: g++-11
-            architecture: -m64
-            sourcefile: uint32.cpp
-            compileroptions: -std=c++2a -O3 -DNDEBUG -DHAVE_ABSEIL
-            outputfile: benchmark
-            os: [self-hosted, linux, x64]
-            install: g++-11
-            command: sudo cset shield --exec -- nice -n -20 sudo -u gha ./benchmark
-          - name: dedicated-server
-            compiler: g++-11
-            architecture: -m64
-            sourcefile: uint64.cpp
-            compileroptions: -std=c++2a -O3 -DNDEBUG -DHAVE_ABSEIL
-            outputfile: benchmark
-            os: [self-hosted, linux, x64]
-            install: g++-11
-            command: sudo cset shield --exec -- nice -n -20 sudo -u gha ./benchmark
+          # - name: dedicated-server
+          #   compiler: g++-11
+          #   architecture: -m64
+          #   sourcefile: string_view.cpp
+          #   compileroptions: -std=c++2a -O3 -DNDEBUG -DHAVE_ABSEIL
+          #   outputfile: benchmark
+          #   os: [self-hosted, linux, x64]
+          #   install: g++-11
+          #   command: sudo cset shield --exec -- nice -n -20 sudo -u gha ./benchmark
+          # - name: dedicated-server
+          #   compiler: g++-11
+          #   architecture: -m64
+          #   sourcefile: uint32.cpp
+          #   compileroptions: -std=c++2a -O3 -DNDEBUG -DHAVE_ABSEIL
+          #   outputfile: benchmark
+          #   os: [self-hosted, linux, x64]
+          #   install: g++-11
+          #   command: sudo cset shield --exec -- nice -n -20 sudo -u gha ./benchmark
+          # - name: dedicated-server
+          #   compiler: g++-11
+          #   architecture: -m64
+          #   sourcefile: uint64.cpp
+          #   compileroptions: -std=c++2a -O3 -DNDEBUG -DHAVE_ABSEIL
+          #   outputfile: benchmark
+          #   os: [self-hosted, linux, x64]
+          #   install: g++-11
+          #   command: sudo cset shield --exec -- nice -n -20 sudo -u gha ./benchmark
           - compiler: g++-11
             architecture: -m64
             sourcefile: string.cpp
@@ -223,9 +223,9 @@ jobs:
       - name: Install packages
         if: matrix.install
         run: |
-          if uname -p | grep -q 'x86_64'; then sudo dpkg --add-architecture i386 ; fi
           sudo -E apt-add-repository -y ppa:ubuntu-toolchain-r/test
           sudo apt-get update
+          if uname -p | grep -q 'x86_64'; then sudo dpkg --add-architecture i386 ; fi
           sudo apt install -y ${{matrix.install}}
           
       - name: Install Boost
