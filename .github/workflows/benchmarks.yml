@@ -223,9 +223,11 @@ jobs:
       - name: Install packages
         if: matrix.install
         run: |
+          set -xe
           sudo -E apt-add-repository -y ppa:ubuntu-toolchain-r/test
           sudo apt-get update
           if uname -p | grep -q 'x86_64'; then sudo dpkg --add-architecture i386 ; fi
+          sudo apt-get update
           sudo apt install -y ${{matrix.install}}
           
       - name: Install Boost
