@@ -236,7 +236,7 @@ jobs:
             pwd
             ls -al
             env
-            export BOOST_BRANCH=1.78.0
+            export BOOST_BRANCH=boost-1.78.0
             cd $HOME
             if [ ! -d boost-root ]; then
               git clone -b $BOOST_BRANCH https://github.com/boostorg/boost.git boost-root --depth 1
@@ -246,9 +246,9 @@ jobs:
               ./b2 headers
               cd ..
             else
-              : # It would be possible to rerun many of those steps every time.
-              : # Faster to assume boost-root is ready.
-              : # Manually reset the runner if updating BOOST_BRANCH.
+              : # It would be possible to rerun many the steps every time.
+              : # Faster to assume boost-root is ready,
+              : # and manually reset the runner if updating BOOST_BRANCH.
             fi
             rsync -av boost-root $GITHUB_WORKSPACE
             ls -al $GITHUB_WORKSPACE
