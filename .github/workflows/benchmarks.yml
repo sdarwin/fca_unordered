@@ -232,6 +232,26 @@ jobs:
       - name: Install Boost
         run: |
           if [ -n "${{matrix.command}}" ]; then
+            set -xe
+            pwd
+            ls -al
+            env
+            export BOOST_BRANCH=1.78.0
+            cd $HOME
+            if [ ! -d boost-root ]; then
+              git clone -b $BOOST_BRANCH https://github.com/boostorg/boost.git boost-root --depth 1
+              cd boost-root
+              git submodule update --init --depth 1
+              ./bootstrap.sh
+              ./b2 headers
+              cd ..
+            else
+              : # It would be possible to rerun many of those steps every time.
+              : # Faster to assume boost-root is ready.
+              : # Manually reset the runner if updating BOOST_BRANCH.
+            fi
+            rsync -av boost-root $GITHUB_WORKSPACE
+            ls -al $GITHUB_WORKSPACE
           else
             cd $GITHUB_WORKSPACE
             git clone https://github.com/boostorg/boost.git boost-root
@@ -275,48 +295,48 @@ jobs:
             compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
             outputfile: benchmark.exe            
             os: windows-2019
-          - compiler: cl
-            architecture: x64
-            sourcefile: string_view.cpp
-            compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
-            outputfile: benchmark.exe            
-            os: windows-2019
-          - compiler: cl
-            architecture: x64
-            sourcefile: uint32.cpp
-            compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
-            outputfile: benchmark.exe            
-            os: windows-2019
-          - compiler: cl
-            architecture: x64
-            sourcefile: uint64.cpp
-            compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
-            outputfile: benchmark.exe            
-            os: windows-2019
-          - compiler: cl
-            architecture: x86
-            sourcefile: string.cpp
-            compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
-            outputfile: benchmark.exe            
-            os: windows-2019
-          - compiler: cl
-            architecture: x86
-            sourcefile: string_view.cpp
-            compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
-            outputfile: benchmark.exe            
-            os: windows-2019
-          - compiler: cl
-            architecture: x86
-            sourcefile: uint32.cpp
-            compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
-            outputfile: benchmark.exe            
-            os: windows-2019
-          - compiler: cl
-            architecture: x86
-            sourcefile: uint64.cpp
-            compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
-            outputfile: benchmark.exe            
-            os: windows-2019
+          # - compiler: cl
+          #   architecture: x64
+          #   sourcefile: string_view.cpp
+          #   compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
+          #   outputfile: benchmark.exe            
+          #   os: windows-2019
+          # - compiler: cl
+          #   architecture: x64
+          #   sourcefile: uint32.cpp
+          #   compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
+          #   outputfile: benchmark.exe            
+          #   os: windows-2019
+          # - compiler: cl
+          #   architecture: x64
+          #   sourcefile: uint64.cpp
+          #   compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
+          #   outputfile: benchmark.exe            
+          #   os: windows-2019
+          # - compiler: cl
+          #   architecture: x86
+          #   sourcefile: string.cpp
+          #   compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
+          #   outputfile: benchmark.exe            
+          #   os: windows-2019
+          # - compiler: cl
+          #   architecture: x86
+          #   sourcefile: string_view.cpp
+          #   compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
+          #   outputfile: benchmark.exe            
+          #   os: windows-2019
+          # - compiler: cl
+          #   architecture: x86
+          #   sourcefile: uint32.cpp
+          #   compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
+          #   outputfile: benchmark.exe            
+          #   os: windows-2019
+          # - compiler: cl
+          #   architecture: x86
+          #   sourcefile: uint64.cpp
+          #   compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
+          #   outputfile: benchmark.exe            
+          #   os: windows-2019
 
     runs-on: ${{matrix.os}}
 
