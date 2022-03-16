@@ -249,7 +249,7 @@ jobs:
               : # Faster to assume boost-root is ready,
               : # and manually reset the runner if updating BOOST_BRANCH.
             fi
-            ln -s boost-root $GITHUB_WORKSPACE/boost-root
+            ln -s $HOME/boost-root $GITHUB_WORKSPACE/boost-root
             ls -al $GITHUB_WORKSPACE
           else
             cd $GITHUB_WORKSPACE
