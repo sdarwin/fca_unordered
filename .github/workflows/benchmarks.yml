@@ -231,13 +231,16 @@ jobs:
           
       - name: Install Boost
         run: |
-          cd $GITHUB_WORKSPACE
-          git clone https://github.com/boostorg/boost.git boost-root
-          cd boost-root
-          git checkout boost-1.78.0
-          git submodule update --init
-          ./bootstrap.sh
-          ./b2 -d0 headers
+          if [ -n "${{matrix.command}}" ]; then
+          else
+            cd $GITHUB_WORKSPACE
+            git clone https://github.com/boostorg/boost.git boost-root
+            cd boost-root
+            git checkout boost-1.78.0
+            git submodule update --init
+            ./bootstrap.sh
+            ./b2 -d0 headers
+          fi
           
       - name: Install Abseil
         run: |
