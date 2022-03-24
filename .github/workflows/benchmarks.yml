@@ -286,48 +286,48 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - compiler: cl
-            architecture: x64
-            sourcefile: string.cpp
-            compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
-            outputfile: benchmark.exe            
-            os: windows-2019
-          - compiler: cl
-            architecture: x64
-            sourcefile: string_view.cpp
-            compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
-            outputfile: benchmark.exe            
-            os: windows-2019
-          - compiler: cl
-            architecture: x64
-            sourcefile: uint32.cpp
-            compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
-            outputfile: benchmark.exe            
-            os: windows-2019
-          - compiler: cl
-            architecture: x64
-            sourcefile: uint64.cpp
-            compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
-            outputfile: benchmark.exe            
-            os: windows-2019
-          - compiler: cl
-            architecture: x86
-            sourcefile: string.cpp
-            compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
-            outputfile: benchmark.exe            
-            os: windows-2019
-          - compiler: cl
-            architecture: x86
-            sourcefile: string_view.cpp
-            compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
-            outputfile: benchmark.exe            
-            os: windows-2019
-          - compiler: cl
-            architecture: x86
-            sourcefile: uint32.cpp
-            compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
-            outputfile: benchmark.exe            
-            os: windows-2019
+          # - compiler: cl
+          #   architecture: x64
+          #   sourcefile: string.cpp
+          #   compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
+          #   outputfile: benchmark.exe            
+          #   os: windows-2019
+          # - compiler: cl
+          #   architecture: x64
+          #   sourcefile: string_view.cpp
+          #   compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
+          #   outputfile: benchmark.exe            
+          #   os: windows-2019
+          # - compiler: cl
+          #   architecture: x64
+          #   sourcefile: uint32.cpp
+          #   compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
+          #   outputfile: benchmark.exe            
+          #   os: windows-2019
+          # - compiler: cl
+          #   architecture: x64
+          #   sourcefile: uint64.cpp
+          #   compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
+          #   outputfile: benchmark.exe            
+          #   os: windows-2019
+          # - compiler: cl
+          #   architecture: x86
+          #   sourcefile: string.cpp
+          #   compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
+          #   outputfile: benchmark.exe            
+          #   os: windows-2019
+          # - compiler: cl
+          #   architecture: x86
+          #   sourcefile: string_view.cpp
+          #   compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
+          #   outputfile: benchmark.exe            
+          #   os: windows-2019
+          # - compiler: cl
+          #   architecture: x86
+          #   sourcefile: uint32.cpp
+          #   compileroptions: /std:c++latest /O2 /D "NDEBUG" /D "HAVE_ABSEIL" /EHsc /MD /Fe:benchmark.exe
+          #   outputfile: benchmark.exe            
+          #   os: windows-2019
           - compiler: cl
             architecture: x86
             sourcefile: uint64.cpp
