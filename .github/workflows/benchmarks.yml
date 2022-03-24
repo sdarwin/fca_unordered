@@ -22,7 +22,7 @@ jobs:
             outputfile: benchmark
             os: [self-hosted, linux, x64]
             install: g++-11
-            globalinstall: g++-11 libc++-12-dev libc++abi-12-dev gcc-11-multilib g++-11-multilib gcc-multilib g++-multilib libc++-12-dev:i386 libc++abi-12-dev:i386
+            globalinstall: g++-11 libc++-12-dev libc++abi-12-dev gcc-11-multilib g++-11-multilib gcc-multilib g++-multilib
             command: sudo cset shield --exec -- nice -n -20 sudo -u gha ./benchmark
           - compiler: g++-11
             architecture: -m64
@@ -53,35 +53,35 @@ jobs:
             sourcefile: string.cpp
             compileroptions: -std=c++2a -O3 -DNDEBUG -DHAVE_ABSEIL
             outputfile: benchmark
-            os: ubuntu-20.04
+            os: [self-hosted, linux, x64]
             command: sudo cset shield --exec -- nice -n -20 sudo -u gha ./benchmark
           - compiler: clang++-12
             architecture: -m64
             sourcefile: string_view.cpp
             compileroptions: -std=c++2a -O3 -DNDEBUG -DHAVE_ABSEIL
             outputfile: benchmark
-            os: ubuntu-20.04
+            os: [self-hosted, linux, x64]
             command: sudo cset shield --exec -- nice -n -20 sudo -u gha ./benchmark
           - compiler: clang++-12
             architecture: -m64
             sourcefile: uint32.cpp
             compileroptions: -std=c++2a -O3 -DNDEBUG -DHAVE_ABSEIL
             outputfile: benchmark
-            os: ubuntu-20.04
+            os: [self-hosted, linux, x64]
             command: sudo cset shield --exec -- nice -n -20 sudo -u gha ./benchmark
           - compiler: clang++-12
             architecture: -m64
             sourcefile: uint64.cpp
             compileroptions: -std=c++2a -O3 -DNDEBUG -DHAVE_ABSEIL
             outputfile: benchmark
-            os: ubuntu-20.04
+            os: [self-hosted, linux, x64]
             command: sudo cset shield --exec -- nice -n -20 sudo -u gha ./benchmark
           - compiler: clang++-12
             architecture: -m64
             sourcefile: string.cpp
             compileroptions: -std=c++2a -O3 -stdlib=libc++ -DNDEBUG -DHAVE_ABSEIL
             outputfile: benchmark
-            os: ubuntu-20.04
+            os: [self-hosted, linux, x64]
             install: libc++-12-dev libc++abi-12-dev
             command: sudo cset shield --exec -- nice -n -20 sudo -u gha ./benchmark
           - compiler: clang++-12
@@ -89,7 +89,7 @@ jobs:
             sourcefile: string_view.cpp
             compileroptions: -std=c++2a -O3 -stdlib=libc++ -DNDEBUG -DHAVE_ABSEIL
             outputfile: benchmark
-            os: ubuntu-20.04
+            os: [self-hosted, linux, x64]
             install: libc++-12-dev libc++abi-12-dev
             command: sudo cset shield --exec -- nice -n -20 sudo -u gha ./benchmark
           - compiler: clang++-12
@@ -97,7 +97,7 @@ jobs:
             sourcefile: uint32.cpp
             compileroptions: -std=c++2a -O3 -stdlib=libc++ -DNDEBUG -DHAVE_ABSEIL
             outputfile: benchmark
-            os: ubuntu-20.04
+            os: [self-hosted, linux, x64]
             install: libc++-12-dev libc++abi-12-dev
             command: sudo cset shield --exec -- nice -n -20 sudo -u gha ./benchmark
           - compiler: clang++-12
@@ -105,7 +105,7 @@ jobs:
             sourcefile: uint64.cpp
             compileroptions: -std=c++2a -O3 -stdlib=libc++ -DNDEBUG -DHAVE_ABSEIL
             outputfile: benchmark
-            os: ubuntu-20.04
+            os: [self-hosted, linux, x64]
             install: libc++-12-dev libc++abi-12-dev
             command: sudo cset shield --exec -- nice -n -20 sudo -u gha ./benchmark
           - compiler: g++-11
@@ -113,7 +113,7 @@ jobs:
             sourcefile: string.cpp
             compileroptions: -std=c++2a -O3 -DNDEBUG -DHAVE_ABSEIL
             outputfile: benchmark
-            os: ubuntu-20.04
+            os: [self-hosted, linux, x64]
             install: g++-11 gcc-11-multilib g++-11-multilib
             command: sudo cset shield --exec -- nice -n -20 sudo -u gha ./benchmark
           - compiler: g++-11
@@ -121,7 +121,7 @@ jobs:
             sourcefile: string_view.cpp
             compileroptions: -std=c++2a -O3 -DNDEBUG -DHAVE_ABSEIL
             outputfile: benchmark
-            os: ubuntu-20.04
+            os: [self-hosted, linux, x64]
             install: g++-11 gcc-11-multilib g++-11-multilib
             command: sudo cset shield --exec -- nice -n -20 sudo -u gha ./benchmark
           - compiler: g++-11
@@ -129,7 +129,7 @@ jobs:
             sourcefile: uint32.cpp
             compileroptions: -std=c++2a -O3 -DNDEBUG -DHAVE_ABSEIL
             outputfile: benchmark
-            os: ubuntu-20.04
+            os: [self-hosted, linux, x64]
             install: g++-11 gcc-11-multilib g++-11-multilib
             command: sudo cset shield --exec -- nice -n -20 sudo -u gha ./benchmark
           - compiler: g++-11
@@ -137,7 +137,7 @@ jobs:
             sourcefile: uint64.cpp
             compileroptions: -std=c++2a -O3 -DNDEBUG -DHAVE_ABSEIL
             outputfile: benchmark
-            os: ubuntu-20.04
+            os: [self-hosted, linux, x64]
             install: g++-11 gcc-11-multilib g++-11-multilib
             command: sudo cset shield --exec -- nice -n -20 sudo -u gha ./benchmark
           - compiler: clang++-12
@@ -145,7 +145,7 @@ jobs:
             sourcefile: string.cpp
             compileroptions: -std=c++2a -O3 -DNDEBUG -DHAVE_ABSEIL
             outputfile: benchmark
-            os: ubuntu-20.04
+            os: [self-hosted, linux, x64]
             install: gcc-multilib g++-multilib
             command: sudo cset shield --exec -- nice -n -20 sudo -u gha ./benchmark
           - compiler: clang++-12
@@ -153,7 +153,7 @@ jobs:
             sourcefile: string_view.cpp
             compileroptions: -std=c++2a -O3 -DNDEBUG -DHAVE_ABSEIL
             outputfile: benchmark
-            os: ubuntu-20.04
+            os: [self-hosted, linux, x64]
             install: gcc-multilib g++-multilib
             command: sudo cset shield --exec -- nice -n -20 sudo -u gha ./benchmark
           - compiler: clang++-12
@@ -161,7 +161,7 @@ jobs:
             sourcefile: uint32.cpp
             compileroptions: -std=c++2a -O3 -DNDEBUG -DHAVE_ABSEIL
             outputfile: benchmark
-            os: ubuntu-20.04
+            os: [self-hosted, linux, x64]
             install: gcc-multilib g++-multilib
             command: sudo cset shield --exec -- nice -n -20 sudo -u gha ./benchmark
           - compiler: clang++-12
@@ -169,7 +169,7 @@ jobs:
             sourcefile: uint64.cpp
             compileroptions: -std=c++2a -O3 -DNDEBUG -DHAVE_ABSEIL
             outputfile: benchmark
-            os: ubuntu-20.04
+            os: [self-hosted, linux, x64]
             install: gcc-multilib g++-multilib
             command: sudo cset shield --exec -- nice -n -20 sudo -u gha ./benchmark
           - compiler: clang++-12
