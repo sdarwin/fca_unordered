@@ -225,6 +225,7 @@ jobs:
               else
                   : # dedicated-server jobs matrix.install section will be ignored. Add all packages to matrix.globalinstall instead.
                   : # only set matrix.globalinstall on one job.
+              fi
           else
 
               # standard gha runners
