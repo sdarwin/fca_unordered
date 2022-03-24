@@ -179,7 +179,6 @@ jobs:
             outputfile: benchmark
             os: ubuntu-20.04
             install: libc++-12-dev:i386 libc++abi-12-dev:i386 gcc-multilib g++-multilib
-            command: sudo cset shield --exec -- nice -n -20 sudo -u gha ./benchmark
           - compiler: clang++-12
             architecture: -m32
             sourcefile: string_view.cpp
@@ -187,7 +186,6 @@ jobs:
             outputfile: benchmark
             os: ubuntu-20.04
             install: libc++-12-dev:i386 libc++abi-12-dev:i386 gcc-multilib g++-multilib
-            command: sudo cset shield --exec -- nice -n -20 sudo -u gha ./benchmark
           - compiler: clang++-12
             architecture: -m32
             sourcefile: uint32.cpp
@@ -195,7 +193,6 @@ jobs:
             outputfile: benchmark
             os: ubuntu-20.04
             install: libc++-12-dev:i386 libc++abi-12-dev:i386 gcc-multilib g++-multilib
-            command: sudo cset shield --exec -- nice -n -20 sudo -u gha ./benchmark
           - compiler: clang++-12
             architecture: -m32
             sourcefile: uint64.cpp
@@ -203,7 +200,6 @@ jobs:
             outputfile: benchmark
             os: ubuntu-20.04
             install: libc++-12-dev:i386 libc++abi-12-dev:i386 gcc-multilib g++-multilib
-            command: sudo cset shield --exec -- nice -n -20 sudo -u gha ./benchmark
 
     runs-on: ${{matrix.os}}
 
