@@ -275,7 +275,9 @@ jobs:
       - name: Run benchmarks
         run: |
           if [ -n "${{matrix.command}}" ]; then
-              echo "running benchmarks"
+              sync
+              sleep 1
+              echo "running benchmarks -"
               ${{matrix.command}}
           else
               echo "running benchmarks"
