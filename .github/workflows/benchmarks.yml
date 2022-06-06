@@ -515,8 +515,11 @@ jobs:
         shell: cmd
         run: |
           cd %GITHUB_WORKSPACE%
-          # call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{matrix.architecture}}
-          call "C:\BuildTools\VC\Auxiliary\Build\vcvarsall.bat" ${{matrix.architecture}}
+          if "${{matrix.name}}" == "dedicated-server" (
+              call "C:\BuildTools\VC\Auxiliary\Build\vcvarsall.bat" ${{matrix.architecture}}
+          ) else (
+              call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{matrix.architecture}}
+          )
 
           set INCLUDE=%INCLUDE%;%GITHUB_WORKSPACE%\boost-root
           set INCLUDE=%INCLUDE%;%GITHUB_WORKSPACE%\abseil-root
