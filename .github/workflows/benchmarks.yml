@@ -466,17 +466,10 @@ jobs:
         run: |
           @ECHO ON
           setlocal enabledelayedexpansion
-          echo matrix.name is "${{matrix.name}}"
-          echo "whoami"
-          whoami
           if "${{matrix.name}}" == "dedicated-server" (
-              echo "dedicated-server case"
               SET BOOST_BRANCH=boost-1.78.0
               cd %userprofile%
-              echo %cd%
-              dir
               if not exist boost-root/ (
-                  echo "Cloning"
                   git clone -b !BOOST_BRANCH! https://github.com/boostorg/boost.git boost-root --depth 1
                   cd boost-root
                   git submodule update --init --depth 1
@@ -484,14 +477,8 @@ jobs:
                   .\b2.exe -d0 headers
                   cd ..
               ) 
-              REM Manually reset the self-hosted runner if modifying BOOST_BRANCH.
-              dir
-              dir %GITHUB_WORKSPACE%
-              REM if not exist %GITHUB_WORKSPACE%\boost-root (
-              REM    mklink /D %GITHUB_WORKSPACE%\boost-root %userprofile%\boost-root
-              REM )
+              REM Manually remove boost-root if modifying BOOST_BRANCH or rebuilding boost-root.
           ) else (
-              echo "not dedicated-server case"
               cd %GITHUB_WORKSPACE%
               git clone https://github.com/boostorg/boost.git boost-root
               cd boost-root
@@ -518,14 +505,10 @@ jobs:
           setlocal enabledelayedexpansion
           cd %GITHUB_WORKSPACE%
           if "${{matrix.name}}" == "dedicated-server" (
-              echo "Setting BOOST_ROOT"
               set BOOST_ROOT=%userprofile%\boost-root
-              echo "Calling vcvars"
               call "C:\BuildTools\VC\Auxiliary\Build\vcvarsall.bat" ${{matrix.architecture}}
           ) else (
-              echo "Setting BOOST_ROOT"
               set BOOST_ROOT=%GITHUB_WORKSPACE%\boost-root
-              echo "Calling vcvars"
               call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{matrix.architecture}}
           )
 
