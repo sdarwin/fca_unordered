@@ -472,10 +472,7 @@ jobs:
           if "${{matrix.name}}" == "dedicated-server" (
               echo "dedicated-server case"
               SET BOOST_BRANCH=boost-1.78.0
-              SET HOME=%HOMEDRIVE%%HOMEPATH%
-              echo "Home:"
-              echo !HOME!
-              cd !HOME!
+              cd %userprofile%
               echo %cd%
               dir
               if not exist boost-root/ (
@@ -491,7 +488,7 @@ jobs:
               dir
               dir %GITHUB_WORKSPACE%
               if not exist %GITHUB_WORKSPACE%\boost-root (
-                  mklink /D !HOME!\boost-root %GITHUB_WORKSPACE%\boost-root
+                  mklink /D %userprofile%\boost-root %GITHUB_WORKSPACE%\boost-root
               )
           ) else (
               echo "not dedicated-server case"
