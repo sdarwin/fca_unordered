@@ -487,9 +487,9 @@ jobs:
               REM Manually reset the self-hosted runner if modifying BOOST_BRANCH.
               dir
               dir %GITHUB_WORKSPACE%
-              if not exist %GITHUB_WORKSPACE%\boost-root (
-                  mklink /D %GITHUB_WORKSPACE%\boost-root %userprofile%\boost-root
-              )
+              REM if not exist %GITHUB_WORKSPACE%\boost-root (
+              REM    mklink /D %GITHUB_WORKSPACE%\boost-root %userprofile%\boost-root
+              REM )
           ) else (
               echo "not dedicated-server case"
               cd %GITHUB_WORKSPACE%
@@ -517,11 +517,14 @@ jobs:
           cd %GITHUB_WORKSPACE%
           if "${{matrix.name}}" == "dedicated-server" (
               call "C:\BuildTools\VC\Auxiliary\Build\vcvarsall.bat" ${{matrix.architecture}}
+              set BOOST_ROOT=%userprofile\boost-root
           ) else (
               call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{matrix.architecture}}
+              set BOOST_ROOT=%GITHUB_WORKSPACE%\boost-root
           )
 
-          set INCLUDE=%INCLUDE%;%GITHUB_WORKSPACE%\boost-root
+          REM set INCLUDE=%INCLUDE%;%GITHUB_WORKSPACE%\boost-root
+          set INCLUDE=%INCLUDE%;!BOOST_ROOT!
           set INCLUDE=%INCLUDE%;%GITHUB_WORKSPACE%\abseil-root
           set INCLUDE=%INCLUDE%;%GITHUB_WORKSPACE%\fastrange-root
           echo %INCLUDE%
