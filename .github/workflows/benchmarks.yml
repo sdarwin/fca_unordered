@@ -488,7 +488,7 @@ jobs:
               dir
               dir %GITHUB_WORKSPACE%
               if not exist %GITHUB_WORKSPACE%\boost-root (
-                  mklink /D %userprofile%\boost-root %GITHUB_WORKSPACE%\boost-root
+                  mklink /D %GITHUB_WORKSPACE%\boost-root %userprofile%\boost-root
               )
           ) else (
               echo "not dedicated-server case"
