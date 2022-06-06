@@ -519,7 +519,7 @@ jobs:
           cd %GITHUB_WORKSPACE%
           if "${{matrix.name}}" == "dedicated-server" (
               echo "Setting BOOST_ROOT"
-              set BOOST_ROOT=%userprofile\boost-root
+              set BOOST_ROOT=%userprofile%\boost-root
               echo "Calling vcvars"
               call "C:\BuildTools\VC\Auxiliary\Build\vcvarsall.bat" ${{matrix.architecture}}
           ) else (
