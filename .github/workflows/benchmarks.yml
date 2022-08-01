@@ -15,6 +15,43 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - name: macos
+            compiler: clang++
+            architecture: -m64
+            sourcefile: string.cpp
+            compileroptions: -std=c++2a -O3 -DNDEBUG -DHAVE_ABSEIL
+            outputfile: benchmark
+            os: [self-hosted, macOS, ARM64]
+            command: ./benchmark
+            xcode_version: 13.4.1
+          # - name: macos
+          #   compiler: clang++
+          #   architecture: -m64
+          #   sourcefile: string_view.cpp
+          #   compileroptions: -std=c++2a -O3 -DNDEBUG -DHAVE_ABSEIL
+          #   outputfile: benchmark
+          #   os: [self-hosted, macOS, ARM64]
+          #   command: ./benchmark
+          #   xcode_version: 13.4.1
+          # - name: macos
+          #   compiler: clang++
+          #   architecture: -m64
+          #   sourcefile: uint32.cpp
+          #   compileroptions: -std=c++2a -O3 -DNDEBUG -DHAVE_ABSEIL
+          #   outputfile: benchmark
+          #   os: [self-hosted, macOS, ARM64]
+          #   command: ./benchmark
+          #   xcode_version: 13.4.1
+          # - name: macos
+          #   compiler: clang++
+          #   architecture: -m64
+          #   sourcefile: uint64.cpp
+          #   compileroptions: -std=c++2a -O3 -DNDEBUG -DHAVE_ABSEIL
+          #   outputfile: benchmark
+          #   os: [self-hosted, macOS, ARM64]
+          #   command: ./benchmark
+          #   xcode_version: 13.4.1
+
           - name: dedicated-server
             compiler: g++-11
             architecture: -m64
@@ -341,6 +378,8 @@ jobs:
           ${{matrix.compiler}} ${{matrix.sourcefile}} ${{matrix.architecture}} ${{matrix.compileroptions}} -o ${{matrix.outputfile}} -I$GITHUB_WORKSPACE/boost-root -I$GITHUB_WORKSPACE/abseil-root -I$GITHUB_WORKSPACE/fastrange-root
       - name: Run benchmarks
         run: |
+          if [ -n "${{matrix.xcode_version}}" ]; then
+              DEVELOPER_DIR=/Applications/Xcode-${{matrix.xcode_version}}.app/Contents/Developer
           if [ -n "${{matrix.command}}" ]; then
               echo "running benchmarks"
               ${{matrix.command}}
