@@ -380,6 +380,7 @@ jobs:
         run: |
           if [ -n "${{matrix.xcode_version}}" ]; then
               DEVELOPER_DIR=/Applications/Xcode-${{matrix.xcode_version}}.app/Contents/Developer
+          fi
           if [ -n "${{matrix.command}}" ]; then
               echo "running benchmarks"
               ${{matrix.command}}
